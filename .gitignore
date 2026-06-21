@@ -1,0 +1,57 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Build directories
+build*/
+.cache/
+
+# CMake
+CMakeUserPresets.json
+CMakeFiles/
+cmake_install.cmake
+
+# Qt
+.qt/
+.qmlls.ini
+
+# Web app (Vite / npm)
+node_modules
+dist
+dist-ssr
+*.local
+logs
+*.log
+npm-debug.log*
+
+# Claude Code local settings
+.claude/settings.local.json

@@ -1,0 +1,3 @@
+[submodule "desktop-cpp/src/libtheo"]
+	path = desktop-cpp/src/libtheo
+	url = https://github.com/Theo-IDE/libtheo.git

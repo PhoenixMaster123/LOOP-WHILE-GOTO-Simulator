@@ -1,0 +1,12 @@
+[Icon Theme]
+name=theoide-material
+comment=Material Icons selected for usage with Theo-IDE
+
+Directories=symbolic/actions
+
+[symbolic/actions]
+Context=Actions
+Size=24
+MinSize=1
+MaxSize=256
+Type=Scalable

@@ -1,0 +1,23 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file>theoide-material/index.theme</file>
+    <file>theoide-material/symbolic/actions/add.svg</file>
+    <file>theoide-material/symbolic/actions/autopause.svg</file>
+    <file>theoide-material/symbolic/actions/autoplay.svg</file>
+    <file>theoide-material/symbolic/actions/bug_report.svg</file>
+    <file>theoide-material/symbolic/actions/close.svg</file>
+    <file>theoide-material/symbolic/actions/dock_to_bottom.svg</file>
+    <file>theoide-material/symbolic/actions/dock_to_left.svg</file>
+    <file>theoide-material/symbolic/actions/file_open.svg</file>
+    <file>theoide-material/symbolic/actions/folder_open.svg</file>
+    <file>theoide-material/symbolic/actions/more_vert.svg</file>
+    <file>theoide-material/symbolic/actions/play_arrow.svg</file>
+    <file>theoide-material/symbolic/actions/replay.svg</file>
+    <file>theoide-material/symbolic/actions/save.svg</file>
+    <file>theoide-material/symbolic/actions/settings.svg</file>
+    <file>theoide-material/symbolic/actions/skip_next.svg</file>
+    <file>theoide-material/symbolic/actions/step.svg</file>
+    <file>theoide-material/symbolic/actions/stop.svg</file>
+  </qresource>
+</RCC>
+
