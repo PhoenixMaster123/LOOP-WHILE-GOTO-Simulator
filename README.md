@@ -7,14 +7,14 @@ This repository contains **two independent implementations**:
 - **Web app (root)** — a browser-based playground & interpreter written in TypeScript.
   This is the quick way to run it: just `npm run dev`. Organised into two folders:
   - `frontend/` — the UI (`main.ts`, `style.css`) that builds the page and wires up the editor.
-  - `backend/` — the language engine (`theo.ts`): the LOOP/WHILE/GOTO tokenizer, parser and interpreter.
+  - `backend/` — the language engine (`interpreter.ts`): the LOOP/WHILE/GOTO tokenizer, parser and interpreter.
 - **Desktop app (`desktop-cpp/`)** — a separate native C++/Qt6 version, built with CMake.
 
 ## How to start
 
 ### Web app
 
-Needs [Node.js](https://nodejs.org/) (v18+). From the repository root:
+Needs [Node.js](https://nodejs.org/) (v20+). From the repository root:
 
 ```
 npm install      # first time only
@@ -48,7 +48,7 @@ The installed `TheoIDE` executable is then started like any other native applica
 
 ## Building
 
-The TheoIDEApp can be build on the platforms Linux, Windows and MacOS and for the platforms Android and IOS. Building on all platforms is reviewed and tested with CMake in combination with the Ninja generator.
+The TheoIDEApp can be built on the platforms Linux, Windows and MacOS. Building on all platforms is reviewed and tested with CMake in combination with the Ninja generator.
 
 To build the application from source the following tools are needed:
 - Qt6.7 or newer
@@ -70,7 +70,7 @@ cmake --install <build-directory>
 To run the installed application on Debian/Ubuntu the library "libxcb-cursor0" needs to be installed.
 
 ```
-sudo apt-get libxcb-cursor0
+sudo apt-get install libxcb-cursor0
 ```
 
 ### Windows
@@ -81,7 +81,7 @@ To build the application with Visual Studio on Windows the following line needs 
 set(CMAKE_PREFIX_PATH <path-to-Qt>/<Qt-Version>/msvc2019_64/lib/cmake)
 ```
 
-After setting the Qt path you can open the project in Visual Studio as administrator, choose "TheoIDE.exe(install)" from the drop-down menu and start the building- and installationprocess. By default the application will be installed at:"c:/Program Files/TheoIDE". You can change the installation path in the CMakeLists.txt by adding:
+After setting the Qt path you can open the project in Visual Studio as administrator, choose "TheoIDE.exe(install)" from the drop-down menu and start the building- and installation process. By default the application will be installed at:"c:/Program Files/TheoIDE". You can change the installation path in the CMakeLists.txt by adding:
 
 ```
 set(CMAKE_INSTALL_PREFIX <\desired_path>)

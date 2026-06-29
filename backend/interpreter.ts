@@ -667,60 +667,113 @@ export interface Example { label: string; lang: string; code: string; }
 
 export const EXAMPLES: Example[] = [
   {
-    label: "LOOP — addition (z = x + y)",
+    label: "LOOP — addition (x_0 = x_1 + x_2)",
     lang: "LOOP",
-    code: `// LOOP language: add two numbers
-// LOOP x DO ... END runs the body exactly x times.
-x := 5;
-y := 3;
-z := x;
-LOOP y DO
-  z := z + 1
+    code: `// LOOP: addition  x_0 = x_1 + x_2
+// Convention: x_1, x_2, ... are the inputs and x_0 holds the result.
+// Only 'var + 1' is allowed, so we add x_2 by counting up x_2 times.
+x_1 := 5;
+x_2 := 3;
+x_0 := x_1;
+LOOP x_2 DO
+  x_0 := x_0 + 1;
 END`,
   },
   {
-    label: "WHILE — multiplication (p = x * y)",
-    lang: "WHILE",
-    code: `// WHILE language: multiply by repeated addition.
-// Note: only 'var + number' is allowed, so to add x we
-// use an inner LOOP that increments p by 1, x times.
-x := 4;
-y := 3;
-p := 0;
-WHILE y != 0 DO
-  LOOP x DO
-    p := p + 1
+    label: "LOOP — multiplication (x_0 = x_1 * x_2)",
+    lang: "LOOP",
+    code: `// LOOP: multiplication  x_0 = x_1 * x_2
+// Add x_1 to the result x_2 times (a LOOP nested inside a LOOP).
+x_1 := 4;
+x_2 := 3;
+x_0 := 0;
+LOOP x_2 DO
+  LOOP x_1 DO
+    x_0 := x_0 + 1;
   END;
-  y := y - 1
 END`,
   },
   {
-    label: "GOTO — sum 1..n",
+    label: "LOOP — factorial (x_0 = x_1!)",
+    lang: "LOOP",
+    code: `// LOOP: factorial  x_0 = x_1!   (x_1 is the input n)
+// Round k multiplies the result x_0 by the counter x_2, then x_2 grows.
+// x_3 is a helper (Hilfsvariable) holding x_2 * x_0.
+x_0 := 1;
+x_1 := 4;
+x_2 := 1;
+LOOP x_1 DO
+  x_3 := 0;
+  LOOP x_2 DO
+    LOOP x_0 DO
+      x_3 := x_3 + 1;
+    END;
+  END;
+  x_0 := x_3 + 0;
+  x_2 := x_2 + 1;
+END`,
+  },
+  {
+    label: "WHILE — power of two (x_0 = 2 ^ x_1)",
+    lang: "WHILE",
+    code: `// WHILE: power of two  x_0 = 2 ^ x_1
+// Double the result until the counter x_1 reaches 0. Doubling x_0 means
+// adding 2 for every unit of x_0, collected in the helper x_2.
+x_1 := 3;
+x_0 := 1;
+WHILE x_1 != 0 DO
+  x_2 := 0;
+  LOOP x_0 DO
+    x_2 := x_2 + 1;
+    x_2 := x_2 + 1;
+  END;
+  x_0 := x_2 + 0;
+  x_1 := x_1 - 1;
+END`,
+  },
+  {
+    label: "GOTO — addition (x_0 = x_1 + x_2)",
     lang: "GOTO",
-    code: `// GOTO language: labels + IF .. THEN GOTO.
-// Adds n to sum using an inner LOOP (only 'var + number' is allowed).
-n := 5;
-sum := 0;
-top: IF n = 0 THEN GOTO done;
-LOOP n DO
-  sum := sum + 1
+    code: `// GOTO: addition  x_0 = x_1 + x_2  (pure GOTO, no LOOP/WHILE)
+// Marks M1, M2, ... are jump targets; IF .. THEN GOTO exits the loop.
+x_1 := 5;
+x_2 := 3;
+x_0 := x_1;
+M1: IF x_2 = 0 THEN GOTO M2;
+x_0 := x_0 + 1;
+x_2 := x_2 - 1;
+GOTO M1;
+M2: STOP`,
+  },
+  {
+    label: "GOTO — multiplication (x_0 = x_1 * x_2)",
+    lang: "GOTO",
+    code: `// GOTO: multiplication  x_0 = x_1 * x_2
+// Add x_1 to the result, count x_2 down, and loop back to mark M1.
+x_1 := 4;
+x_2 := 3;
+x_0 := 0;
+M1: IF x_2 = 0 THEN GOTO M2;
+LOOP x_1 DO
+  x_0 := x_0 + 1
 END;
-n := n - 1;
-GOTO top;
-done: STOP`,
+x_2 := x_2 - 1;
+GOTO M1;
+M2: STOP`,
   },
   {
     label: "PROGRAM — subprogram call (RUN)",
     lang: "RUN",
-    code: `// Subprogram with IN/OUT, called via RUN ... WITH ... END
-PROGRAM Double IN a OUT b DO
-  b := a;
-  LOOP a DO
-    b := b + 1
+    code: `// Subprogram with IN/OUT, called via RUN ... WITH ... END.
+// Inside a PROGRAM, x_0/x_1 are local, so they don't clash with the caller.
+PROGRAM Double IN x_1 OUT x_0 DO
+  x_0 := x_1;
+  LOOP x_1 DO
+    x_0 := x_0 + 1
   END
 END
 
-input := 7;
-result := RUN Double WITH input END`,
+x_1 := 7;
+x_0 := RUN Double WITH x_1 END`,
   },
 ];

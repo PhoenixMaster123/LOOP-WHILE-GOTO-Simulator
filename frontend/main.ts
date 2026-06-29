@@ -1,6 +1,6 @@
 import "./style.css";
-import { run, TheoError, EXAMPLES, EXT_DEFS, NO_EXTENSIONS } from "../backend/theo";
-import type { Extensions } from "../backend/theo";
+import { run, TheoError, EXAMPLES, EXT_DEFS, NO_EXTENSIONS } from "../backend/interpreter";
+import type { Extensions } from "../backend/interpreter";
 
 const STORAGE_KEY = "theo-ide.code";
 const EXT_STORAGE_KEY = "theo-ide.ext";
@@ -68,15 +68,15 @@ app.innerHTML = `
       <tr><td><code>x := x + 1</code> / <code>x := x - 1</code></td><td>increment / decrement (never below 0)</td></tr>
       <tr><td><code>LOOP x DO … END</code></td><td>run body x times (x read once)</td></tr>
       <tr><td><code>WHILE x != 0 DO … END</code></td><td>run body while x ≠ 0</td></tr>
-      <tr><td><code>L: …</code> · <code>GOTO L</code></td><td>label and jump</td></tr>
-      <tr><td><code>IF x = 0 THEN GOTO L</code></td><td>conditional jump</td></tr>
+      <tr><td><code>M1: …</code> · <code>GOTO M1</code></td><td>mark (label) and jump</td></tr>
+      <tr><td><code>IF x = 0 THEN GOTO M1</code></td><td>conditional jump</td></tr>
       <tr><td><code>STOP</code></td><td>halt the program</td></tr>
       <tr><td><code>PROGRAM P IN a OUT b DO … END</code></td><td>define a subprogram</td></tr>
       <tr><td><code>RUN P WITH a, b END</code></td><td>call a subprogram (as a value)</td></tr>
     </table>
     <p class="note">Variables are non-negative integers (default 0). Statements are separated by <code>;</code>.</p>
     <p class="note">Operators like <code>x + y</code>, <code>x * y</code>, <code>x % y</code> / <code>x MOD y</code>
-      are <strong>not</strong> part of base Theo — enable them in the <strong>⚙ Extensions</strong> menu first.</p>
+      are <strong>not</strong> part of the base language — enable them in the <strong>⚙ Extensions</strong> menu first.</p>
   </details>
 `;
 
